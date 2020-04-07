@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
+import initializer from './modules/initializer.jsx';
 import * as serviceWorker from './serviceWorker';
 
+initializer();
 ReactDOM.render(
   <App />,
   document.getElementById('root')
