@@ -22,16 +22,38 @@ public class CorsFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) res;
 
-    response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    response.addHeader("Access-Control-Allow-Origin", "*");
     response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    response.setHeader(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, observe");
     response.setHeader("Access-Control-Allow-Credentials", "true");
     response.setHeader("Access-Control-Max-Age", "3600");
+    response.setHeader("Access-Control-Expose-Headers", "Authorization");
+    response.addHeader("Access-Control-Expose-Headers", "responseType");
+    response.addHeader("Access-Control-Expose-Headers", "observe");
 
     logger.debug("CORSFilter HTTP Request Method: " + request.getMethod());
     logger.debug("CORSFilter HTTP Request URL: " + request.getRequestURI());
 
-    filterChain.doFilter(request, res);
+    if (!(request.getMethod().equalsIgnoreCase("OPTIONS"))) {
+      try {
+        filterChain.doFilter(req, res);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    } else {
+      System.out.println("Pre-flight");
+      response.setHeader("Access-Control-Allow-Origin", "*");
+      response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT");
+      response.setHeader("Access-Control-Max-Age", "3600");
+      response.setHeader(
+          "Access-Control-Allow-Headers",
+          "Access-Control-Expose-Headers"
+              + "Authorization, content-type,"
+              + "access-control-request-headers,access-control-request-method,accept,origin,authorization,x-requested-with,responseType,observe");
+      response.setStatus(HttpServletResponse.SC_OK);
+    }
   }
 
   @Override
