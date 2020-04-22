@@ -6,6 +6,8 @@ const Router = () => (
   <main>
     <Switch>
       <Route exact path="/" component={() => <h1>Home page</h1>} />
+      <Route path="/home" component={() => <h1>Home page</h1>} />
+      <Route path="/help" component={() => <h1>Help page</h1>} />
       <Route path="/login" component={LoginForm} />
     </Switch>
   </main>
