@@ -1,0 +1,48 @@
+.menu {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+a {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  font-size: 0.875rem;
+  padding: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  font-size: 0.875rem;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  background-color: #3848a1;
+}
+
+button {
+  margin-top: 5px !important;
+  width: 40px;
+  padding: 4px !important;
+  border-radius: 4px !important;
+}
+
+#root {
+  flex-grow: 1;
+}
+
+.menuButton {
+  margin-right: 2;
+}
+
+.title {
+  flex-grow: 1;
+  color: '#f00';
+}
